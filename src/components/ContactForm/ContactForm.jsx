@@ -3,7 +3,7 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 
 const FeedbackSchema = Yup.object().shape({
 	name: Yup.string()
@@ -12,7 +12,7 @@ const FeedbackSchema = Yup.object().shape({
 		.required(<span className={css.error}>Required</span>),
 	number: Yup.string()
 		.min(3, <span className={css.error}>Too Short!</span>)
-		.max(9, <span className={css.error}>Too Long!</span>)
+		.max(12, <span className={css.error}>Too Long!</span>)
 		.required(<span className={css.error}>Required</span>),
 });
 
@@ -27,7 +27,6 @@ const ContactForm = () => {
 	const handleSubmit = (values, actions) => {
 		dispatch(
 			addContact({
-				id: nanoid(9),
 				name: values.name,
 				number: values.number,
 			})
@@ -60,7 +59,7 @@ const ContactForm = () => {
 					type="text"
 					name="number"
 					id={numberId}
-					placeholder="111-11-11"
+					placeholder="111-111-1111"
 				/>
 
 				<ErrorMessage className={css.error} name="number" as="span" />
